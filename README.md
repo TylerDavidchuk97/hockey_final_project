@@ -11,6 +11,6 @@ Project Outline
 
 ⦁This project would take user input and would display the results as required for the deployment portion specified by the project guidelines.
 
-⦁time permiting this would likely use django framework for deployment if not postman would likely be used
+⦁time permiting this would likely use django framework for deployment if not Flask would likely be used
 
 
