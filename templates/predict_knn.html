@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+  <meta charset="UTF-8">
+  <title>Hockey KNN Prediction Page</title>
+</head>
+
+<body style="background: rgb(255, 255, 255);">
+	<h1 id="center">Closest Compareable Player Search</h1>
+  <form action="/predict/">
+    <label for="fname" id="center">Enter Player Name:</label>
+    <input type="text" id="name" name="name" id="center">
+    <input type="submit" value="Submit" id="center">
+    <input type="reset" id="center">
+  </form> 
+</body>
+</html>
