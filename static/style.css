@@ -1,10 +1,19 @@
-#blocktext {
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em
-}
-
 #center {
 	text-align: center;
-	color: skyblue;
+	color: rgb(255, 255, 255);
   }
+
+#content {
+  width: 200px;
+  height: 600px;
+  background-color: blue;
+  position: absolute; /*Can also be `fixed`*/
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}

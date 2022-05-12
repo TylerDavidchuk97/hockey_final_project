@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  body {
+      background-image: url('/static/Background/Oilers.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+</style> 
 <head>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
   <meta charset="UTF-8">
   <title>Hockey LSTM Prediction Page</title>
 </head>
 
-<body style="background: rgb(255, 255, 255);">
+<body>
+  <div id="center">
 	<h1 id="center">Predict Player PPG</h1>
-  <form action="/predict/">
+  <form action="/predict_lstm.html">
     <label for="fname" id="center">Enter Player Name:</label>
-    <input type="text" id="name" name="name" id="center">
-    <input type="submit" value="Submit" id="center">
-    <input type="reset" id="center">
-  </form> 
+    <input type="text" id="name" name="name" >
+    <input type="submit" value="Submit">
+    <input type="reset">
+  </form>
+  </div> 
 </body>
 </html>
