@@ -1,10 +1,10 @@
 import pickle
+import import_ipynb
 import pandas as pd
 import tensorflow as tf
 from flask import Flask, render_template, jsonify, request
 from keras.models import load_model
-
-
+from project import players
 
 
 
