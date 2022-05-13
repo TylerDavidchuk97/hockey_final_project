@@ -4,9 +4,14 @@
   }
 
 #border {
-  border:5px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
   border-style:solid;
   border-color:#000000;
-  text-align: center;
-  color: rgb(255, 255, 255);
+  background: #ffffff;
+  color: #000000;
 }

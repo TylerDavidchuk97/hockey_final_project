@@ -1,12 +1,8 @@
 import pickle
-import import_ipynb
 import pandas as pd
 import tensorflow as tf
 from flask import Flask, render_template, jsonify, request
 from keras.models import load_model
-from project import players
-
-
 
 #create flask app
 app = Flask(__name__)
@@ -28,15 +24,12 @@ LSTM_model = load_model('Hockey_LSTM_Model.h5')
 def index_view():
     return render_template('index.html')
 
-@app.route('/predict_lstm.html', methods=['POST'])
+@app.route('/predict_lstm.html', methods=['POST', 'GET'])
 def predict():
-
-    player = request.json(force=True)
     
-
     return render_template('predict_lstm.html')
 
-@app.route('/predict_knn.html', methods=['POST'])
+@app.route('/predict_knn.html', methods=['POST', 'GET'])
 def closest():
 
     return render_template('predict_knn.html')
