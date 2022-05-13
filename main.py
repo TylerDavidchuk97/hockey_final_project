@@ -1,4 +1,3 @@
-
 import pickle
 import pandas as pd
 import tensorflow as tf
@@ -26,12 +25,15 @@ LSTM_model = load_model('Hockey_LSTM_Model.h5')
 def index_view():
     return render_template('index.html')
 
-@app.route('/predict_lstm.html', methods=['GET','POST'])
+@app.route('/predict_lstm.html', methods=['POST'])
 def predict():
+
+    player = request.json(force=True)
+    
 
     return render_template('predict_lstm.html')
 
-@app.route('/predict_knn.html', methods=['GET','POST'])
+@app.route('/predict_knn.html', methods=['POST'])
 def closest():
 
     return render_template('predict_knn.html')
