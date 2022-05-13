@@ -3,6 +3,7 @@ import pandas as pd
 import tensorflow as tf
 from flask import Flask, render_template, jsonify, request
 from keras.models import load_model
+from functions import compareable, players, shape_data, scale_data, predict, get_result
 
 #create flask app
 app = Flask(__name__)
