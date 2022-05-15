@@ -27,6 +27,8 @@ def index_view():
 
 @app.route('/predict_lstm.html', methods=['POST', 'GET'])
 def predict():
+
+    
     
     return render_template('predict_lstm.html')
 
