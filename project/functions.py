@@ -93,6 +93,10 @@ def players(df, seasons):
 
 
 def predict(df, lstm_model):
+
+    with open('../hockey_final_project/x_train.pkl', 'rb') as f:
+        x_train = pickle.load(f)
+
     eligible_players = players(df, 3).reset_index(drop=True)
     
     #drop the columns we don't want
@@ -104,7 +108,6 @@ def predict(df, lstm_model):
     #now we need to reshape the data
     player_data_to_predict_x, player_data_to_predict_y = shape_data(player_data_to_predict, 3)
 
-
     #now we scale the data
     #inintalize min max scaler
     mm_scaler = MinMaxScaler()
@@ -112,7 +115,7 @@ def predict(df, lstm_model):
     #because the data is in a 3d shape we need to reshape it to 2D form which is what MinMaxscaler expects to transform the data
     #we add another reshape afterwards to reshape the dataset back to the original 3D shape we had before transformation
     #fit_transform the x_train data
-    train = mm_scaler.fit_transform(player_data_to_predict_x.reshape(-1, player_data_to_predict_x.shape[-1])).reshape(player_data_to_predict_x.shape)
+    train = mm_scaler.fit_transform(x_train.reshape(-1, x_train.shape[-1])).reshape(x_train.shape)
 
     scaled_x = mm_scaler.transform(player_data_to_predict_x.reshape(-1, player_data_to_predict_x.shape[-1])).reshape(player_data_to_predict_x.shape)
 
@@ -130,15 +133,11 @@ def predict(df, lstm_model):
 
 
 
-def get_result(player):
+def get_result(lstm_model, player):
+    
+    data = pd.read_csv('../hockey_final_project/Prediction_Dataset.csv')
 
-    #load our two datasets we need to use to predict with
-    lstm_df = pd.read_csv('../hockey_final_project/Prediciton_Dataset.csv')
-
-    #load our LSTM_Hockey_Model in using keras
-    lstm_model = load_model('../hockey_final_project/project/Hockey_LSTM_Model')
-
-    results, eligible_players = predict(lstm_df, lstm_model)
+    results, eligible_players = predict(data, lstm_model)
 
     last_season = players(eligible_players, 1).reset_index(drop=True)
 
