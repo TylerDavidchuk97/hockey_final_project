@@ -15,19 +15,33 @@ pd.options.mode.chained_assignment = None  # default='warn'
 #create function to return our closest compareable player along with their stats which is pulled directly from the knn_dataframe
 def compareable(player):
 
-    dataset = pd.read_csv('../hockey_final_project/KNN_Dataset.csv')
+    df_model = pd.read_csv('../hockey_final_project/Prediction_Dataset.csv')
 
-    #load the model from disk
-    with open('Hockey_KNN_model.pkl', 'rb') as f:
-        model = pickle.load(f)
+    #create a new df for the KNN
+    df_knn = df_model.drop(['season', 'link'], axis=1)
+
+    #create a groupby aggregating all the stats to get career averages
+    group = df_knn.groupby('playername').agg({'gp': ['sum'], 'tp': ['sum'], 'ppg': ['mean'], 'gpg': ['mean'],
+                                    'apg': ['mean'], 'pmpg': ['mean'], '+/-pg': ['mean'],
+                                    'position_C': ['mean'], 'position_D': ['mean'], 'position_F': ['mean'], 
+                                    'position_L': ['mean'], 'position_R': ['mean'], 'position_W': ['mean']})
+
+    #drop column level 1 which is the mean and sum as we have an multiindex and it's a bit of a pain to work with it
+    group.columns = group.columns.droplevel(1)
+
+    #create a nearest neighbours for our dataset and fit it
+    nn= NearestNeighbors(radius=0.5, algorithm='auto')
+    KNN_model = nn.fit(group)
+
 
     #get the closest compareable player for our asked about player
-    comparable = model.kneighbors([dataset.loc[player,:]], 2, False)
+    comparable = KNN_model.kneighbors([group.loc[player,:]], 2, False)
 
     #convert array to list which is the index in our group dataframe of which player is closest to them
     comparable = list(comparable[0])
 
-    return dataset.iloc[comparable]
+    return group.iloc[comparable]
+
 
 def shape_data(df, lags):
     shape_of_dataset = df.shape
@@ -119,7 +133,7 @@ def predict(df, lstm_model):
 def get_result(player):
 
     #load our two datasets we need to use to predict with
-    lstm_df = pd.read_csv('../hockey_final_project/LSTM_Dataset.csv')
+    lstm_df = pd.read_csv('../hockey_final_project/Prediciton_Dataset.csv')
 
     #load our LSTM_Hockey_Model in using keras
     lstm_model = load_model('../hockey_final_project/project/Hockey_LSTM_Model')

@@ -19,14 +19,14 @@
 	<h1>Predict Player PPG</h1>
   <form action="/predict_lstm" method="POST">
     <label for="name">Enter Player Name:</label>
-      <input type="text" name="playername">
+      <input type="text" name="playername_lstm">
       <input type="submit", value="Submit">
       <input type="reset">
   </form>
   </div>
 
   {% for table in tables %}
-            {{ table|safe }}
+    {{ table|safe }}
   {% endfor %}
 
 </body>
