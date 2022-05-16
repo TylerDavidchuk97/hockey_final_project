@@ -7,14 +7,6 @@ from project.functions import compareable, players, shape_data, scale_data, pred
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-#load our two datasets we need to use to predict with
-lstm_df = pd.read_csv('../hockey_final_project/LSTM_Dataset.csv')
-
-
-#load our LSTM_Hockey_Model in using keras
-LSTM_model = load_model('Hockey_LSTM_Model.h5')
-
-
 @app.route('/')
 def index_view():
     return render_template('index.html')
