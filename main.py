@@ -1,3 +1,4 @@
+from unittest import result
 import pandas as pd
 import tensorflow as tf
 from flask import Flask, render_template, jsonify, request
@@ -11,17 +12,23 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def index_view():
     return render_template('index.html')
 
-@app.route('/predict_lstm.html', methods=['POST', 'GET'])
+@app.route('/predict_lstm', methods=['POST', 'GET'])
 def predict():
 
     #grab from our webpage to python
     if request.method == 'POST':
             player = request.form['playername']
 
-    #return result from python to webpage
-    return render_template('predict_lstm.html', n = player)
+            lstm_results = get_result(player)
+            
+            #return result from python to webpage
+            return render_template('predict_lstm.html', tables=[lstm_results.to_html(classes='data', header="true", index=False)])
 
-@app.route('/predict_knn.html', methods=['POST', 'GET'])
+        #render webpage for get requests, as we won't actually input data as we're clicking the button to load the page
+    if request.method == 'GET':
+        return render_template('predict_lstm.html')
+
+@app.route('/predict_knn', methods=['POST', 'GET'])
 def closest():
 
     return render_template('predict_knn.html')

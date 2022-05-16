@@ -29,21 +29,6 @@ def compareable(player):
 
     return dataset.iloc[comparable]
 
-
-
-def players(df, seasons):
-
-    #group the data so that we have two rows for every player to predict from
-    grouped = df.sort_values(by=['playername', 'season']).groupby('link', dropna=False).tail(seasons)
-
-    #filter the data if we don't have three rows we've got an issue predicting so we'll need to exclude those players unfortunately as it throws the prediction off pretty bad
-    counts = grouped['link'].value_counts()
-    filtered_data = grouped[~grouped['link'].isin(counts[counts < seasons].index)]
-    
-    filtered_data
-
-    return filtered_data
-
 def shape_data(df, lags):
     shape_of_dataset = df.shape
 
@@ -77,6 +62,21 @@ def scale_data(train, test):
     test = scaler.transform(test.reshape(-1, test.shape[-1])).reshape(test.shape)
 
     return train, test
+
+
+def players(df, seasons):
+
+    #group the data so that we have two rows for every player to predict from
+    grouped = df.sort_values(by=['playername', 'season']).groupby('link', dropna=False).tail(seasons)
+
+    #filter the data if we don't have three rows we've got an issue predicting so we'll need to exclude those players unfortunately as it throws the prediction off pretty bad
+    counts = grouped['link'].value_counts()
+    filtered_data = grouped[~grouped['link'].isin(counts[counts < seasons].index)]
+    
+    filtered_data
+
+    return filtered_data
+
 
 def predict(df, lstm_model):
     eligible_players = players(df, 3).reset_index(drop=True)
