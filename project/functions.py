@@ -122,7 +122,7 @@ def get_result(player):
     lstm_df = pd.read_csv('../hockey_final_project/LSTM_Dataset.csv')
 
     #load our LSTM_Hockey_Model in using keras
-    lstm_model = load_model('Hockey_LSTM_Model.h5')
+    lstm_model = load_model('../hockey_final_project/project/Hockey_LSTM_Model')
 
     results, eligible_players = predict(lstm_df, lstm_model)
 
