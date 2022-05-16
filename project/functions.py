@@ -3,15 +3,23 @@
 #this file was created as there seems to be an issue importing functions from .ipynb files into .py files, so the functions.py files will be imported instead-
 #-as it will follow standard python machinery
 import pandas as pd
+import pickle
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.neighbors import NearestNeighbors
 from tensorflow import keras
+from keras.models import load_model
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
 #create function to return our closest compareable player along with their stats which is pulled directly from the knn_dataframe
-def compareable(dataset, model, player):
+def compareable(player):
+
+    dataset = pd.read_csv('../hockey_final_project/KNN_Dataset.csv')
+
+    #load the model from disk
+    with open('Hockey_KNN_model.pkl', 'rb') as f:
+        model = pickle.load(f)
 
     #get the closest compareable player for our asked about player
     comparable = model.kneighbors([dataset.loc[player,:]], 2, False)
@@ -108,9 +116,15 @@ def predict(df, lstm_model):
 
 
 
-def get_result(data, lstm_model, player):
-    
-    results, eligible_players = predict(data, lstm_model)
+def get_result(player):
+
+    #load our two datasets we need to use to predict with
+    lstm_df = pd.read_csv('../hockey_final_project/LSTM_Dataset.csv')
+
+    #load our LSTM_Hockey_Model in using keras
+    lstm_model = load_model('Hockey_LSTM_Model.h5')
+
+    results, eligible_players = predict(lstm_df, lstm_model)
 
     last_season = players(eligible_players, 1).reset_index(drop=True)
 

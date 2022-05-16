@@ -1,9 +1,7 @@
-import pickle
 import pandas as pd
 import tensorflow as tf
 from flask import Flask, render_template, jsonify, request
-from keras.models import load_model
-from functions import compareable, players, shape_data, scale_data, predict, get_result
+from project.functions import compareable, players, shape_data, scale_data, predict, get_result
 
 #create flask app
 app = Flask(__name__)
@@ -11,11 +9,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 #load our two datasets we need to use to predict with
 lstm_df = pd.read_csv('../hockey_final_project/LSTM_Dataset.csv')
-knn_df = pd.read_csv('../hockey_final_project/KNN_Dataset.csv')
 
-#load the model from disk
-with open('Hockey_KNN_model.pkl', 'rb') as f:
-    loaded_model_knn = pickle.load(f)
 
 #load our LSTM_Hockey_Model in using keras
 LSTM_model = load_model('Hockey_LSTM_Model.h5')
@@ -28,9 +22,12 @@ def index_view():
 @app.route('/predict_lstm.html', methods=['POST', 'GET'])
 def predict():
 
-    
-    
-    return render_template('predict_lstm.html')
+    #grab from our webpage to python
+    if request.method == 'POST':
+            player = request.form['playername']
+
+    #return result from python to webpage
+    return render_template('predict_lstm.html', n = player)
 
 @app.route('/predict_knn.html', methods=['POST', 'GET'])
 def closest():
