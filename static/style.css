@@ -1,3 +1,5 @@
+body { font-family: Arial, sans-serif;}
+
 #center_text {
 	text-align: center;
 	color: rgb(0, 0, 0);
@@ -12,8 +14,27 @@
   text-align: center;
   border-style:solid;
   border-color:#000000;
+  background: #000000;
+  color: #ffffff;
+}
+
+table {
+  font-family: Arial, sans-serif;
+  width:100px;
+  height:100px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
   background: #ffffff;
-  color: #000000;
+  transform: translate(-50%, -50%);
+}
+
+td, th {
+  border: thick double 1px #ffffff;
+  background: #000000;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 6px;
 }
 
 /* Position the navbar container inside the image */

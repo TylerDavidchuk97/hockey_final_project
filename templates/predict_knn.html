@@ -34,9 +34,11 @@
       <input type="reset">
   </form>
   </div> 
-
-  {% for table in tables %}
-    {{ table|safe }}
-  {% endfor %}
 </body>
+
+<div>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+</div>
 </html>
