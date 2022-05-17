@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  body {
-      background-image: url('/static/Background/Jets.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-</style> 
 <head>
+  <style>html {
+    background: url('/static/Background/Jets.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+  }
+  </style>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
   <meta charset="UTF-8">
   <title>Hockey Prediction Project Home</title>
 </head>
 
-
 <body>
-  <div id="border">
-	<h1>Hockey Prediction Project, Click either button to go to prediction pages!</h1>
-  <p>
-  <a href="predict_lstm"><button>LSTM Points Per Game Prediction Page</button></a>
-  </p>
-
-  <p>
-  <a href="predict_knn"><button>KNN Closest Compareable Player Page</button></a>
-  </p>
+  <div class="container">
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a href="predict_lstm">PPG Prediction</a>
+      <a href="predict_knn">Closest Compareable Player</a>
+    </div>
   </div>
-</body>
+</body> 
 </html>

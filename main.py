@@ -1,4 +1,5 @@
 from unittest import result
+from matplotlib.pyplot import title
 import pandas as pd
 import tensorflow as tf
 from keras.models import load_model
@@ -26,7 +27,7 @@ def predict():
             lstm_results = get_result(lstm_model, str(player))
             
             #return result from python to webpage
-            return render_template('predict_lstm.html', tables=[lstm_results.to_html(classes='data', header="true", index=False)])
+            return render_template('predict_lstm.html', tables=[lstm_results.to_html(classes='data', index=False)], titles=['Player Predicted Points Per Game'])
 
         #render webpage for get requests, as we won't actually input data as we're clicking the button to load the page
     if request.method == 'GET':
@@ -42,7 +43,7 @@ def closest():
             knn_results = compareable(str(player))
             
             #return result from python to webpage
-            return render_template('predict_knn.html', tables=[knn_results.to_html(classes='data', header="true", index=True)])
+            return render_template('predict_knn.html', tables=[knn_results.to_html(classes='data', index=True)], titles=['Closest Compareable Players'])
 
         #render webpage for get requests, as we won't actually input data as we're clicking the button to load the page
     if request.method == 'GET':
@@ -50,4 +51,5 @@ def closest():
             
 
 if __name__ == '__main__':
+
     app.run(debug=True, port=5000)

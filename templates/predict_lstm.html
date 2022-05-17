@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  body {
-      background-image: url('/static/Background/Oilers.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-</style> 
 <head>
+  <style>html {
+    background: url('/static/Background/Oilers.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+  }
+  </style>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
   <meta charset="UTF-8">
   <title>Hockey LSTM Prediction Page</title>
 </head>
+
+<body>
+  <div class="container">
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a href="predict_lstm">PPG Prediction</a>
+      <a href="predict_knn">Closest Compareable Player</a>
+    </div>
+  </div>
+</body> 
 
 <body>
   <div id="border">
