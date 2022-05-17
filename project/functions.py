@@ -133,8 +133,11 @@ def predict(df, lstm_model):
 
 
 
-def get_result(lstm_model, player):
+def get_result(player):
     
+    #load LSTM model
+    lstm_model = load_model('../hockey_final_project/project/Hockey_LSTM_Model')
+
     data = pd.read_csv('../hockey_final_project/Prediction_Dataset.csv')
 
     results, eligible_players = predict(data, lstm_model)

@@ -10,8 +10,6 @@ from project.functions import compareable, get_result
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-#load LSTM model, we don't need to load the KNN model
-lstm_model = load_model('../hockey_final_project/project/Hockey_LSTM_Model')
 
 @app.route('/')
 def index_view():
@@ -24,7 +22,7 @@ def predict():
     if request.method == 'POST':
             player = request.form['playername_lstm']
 
-            lstm_results = get_result(lstm_model, str(player))
+            lstm_results = get_result(str(player))
             
             #return result from python to webpage
             return render_template('predict_lstm.html', tables=[lstm_results.to_html(classes='data', header=True, index=False)])
