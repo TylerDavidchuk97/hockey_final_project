@@ -1,8 +1,9 @@
-body { font-family: Arial, sans-serif;}
+body, h1 {font-family: Arial, sans-serif;}
+
 
 #center_text {
 	text-align: center;
-	color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
   }
 
 #border {
