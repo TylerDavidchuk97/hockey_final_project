@@ -10,11 +10,12 @@ from project.functions import compareable, get_result
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-
+#home page
 @app.route('/')
 def index_view():
     return render_template('index.html')
 
+#lstm predict page
 @app.route('/predict_lstm', methods=['POST', 'GET'])
 def predict():
 
@@ -31,6 +32,7 @@ def predict():
     if request.method == 'GET':
         return render_template('predict_lstm.html')
 
+#closest compareable page
 @app.route('/predict_knn', methods=['POST', 'GET'])
 def closest():
 
