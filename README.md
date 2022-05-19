@@ -18,6 +18,6 @@ Project Outline
 ⦁This project takes user input via browser using html displays the results as required for the deployment portion specified by the project guidelines.
 
 
-The html deployment was accomplished using flask 
+⦁The html deployment was accomplished using flask 
 
 
