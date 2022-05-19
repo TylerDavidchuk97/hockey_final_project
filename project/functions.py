@@ -148,10 +148,10 @@ def get_result(player):
     last_season['LSTM_predicted_next_season_ppg'] = results
 
     #grab only information we would like to see
-    last_season = last_season[['playername', 'link', 'ppg', 'LSTM_predicted_next_season_ppg']]
+    last_season = last_season[['playername', 'ppg', 'LSTM_predicted_next_season_ppg']]
 
     #rename ppg to current season ppg, and link to Elite prospects link
-    last_season.rename(columns={'ppg':'current_season_ppg', 'link':'elite_prospects_link'}, inplace=True)
+    last_season.rename(columns={'ppg':'current_season_ppg'}, inplace=True)
     result = last_season.loc[last_season['playername']==player]
 
     return result
