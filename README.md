@@ -15,7 +15,7 @@ Project Outline
 ⦁All career stats used for eligible players for the LSTM points per game prediction were divided by their games played for that season. This is fair as players a long time ago near the start of the league didn't play near as many games as players do today (82 games a season as of the 2021-2022 NHL season).
 
 
-⦁This project takes user input via browser using html displays the results as required for the deployment portion specified by the project guidelines.
+⦁This project takes user input via browser using html and displays the results as required for the deployment portion specified by the project guidelines.
 
 
 ⦁The html deployment was accomplished using flask 
